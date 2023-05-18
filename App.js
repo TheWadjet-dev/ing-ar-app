@@ -1,9 +1,21 @@
-import { StyleSheet, View} from 'react-native';
+import React from 'react';
+import { SafeAreaView, StyleSheet} from 'react-native';
 import SingInScreen from './src/screens/SingInScreen';
 
-export default function App() {
+const App = () => {
   return (
-      <SingInScreen/>
+    <SafeAreaView style={styles.root}>
+      <SingInScreen />
+    </SafeAreaView>
   );
-}
+};
 
+const styles = StyleSheet.create({
+  root: {
+    flex: 1,
+    backgroundColor: '#F9FBFC',
+  },
+});
+
+
+export default App;
