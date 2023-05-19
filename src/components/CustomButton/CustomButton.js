@@ -1,17 +1,36 @@
-import { View, Text, StyleSheet } from 'react-native'
-import React from 'react'
+import { View, Text, StyleSheet, Pressable } from 'react-native';
+import React from 'react';
 
-const Button = () => {
+const Button = ({ onPress, text, type }) => {
   return (
-    <View style={styles.container}>
-      <Text style={styles.text}>Button</Text>
-    </View>
+    <Pressable onPress={onPress} style={styles.container}>
+      <Text style={styles.text}>{text}</Text>
+    </Pressable>
   )
 }
 
 const styles = StyleSheet.create({
    container: {
+      
+      width: '100%',
+      padding: 15,
+      marginVertical: 5,
+      alignItems: 'center',
+      borderRadius: 5,
    },
-   text: {}
+
+   container_PRIMARY: {
+      backgroundColor: '#3B71F3',
+   },
+
+   container_TERTIARY: {
+
+   },
+
+   text: {
+      fontWeight: 'bold',
+      color: 'white',
+   }
   });
-export default Button
+
+export default Button;

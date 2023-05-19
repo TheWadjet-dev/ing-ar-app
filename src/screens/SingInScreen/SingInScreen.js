@@ -12,14 +12,23 @@ const SingInScreen = () => {
 
   const {height} = useWindowDimensions();
   
+  const onSinInPressed = () => {
+    console.warn("Iniciar Sesion")
+  }
+
+  const onForgotPasswordPressed = () => {
+    console.warn("Olvido su contrasena")
+  }
 
   return (
     <View style={styles.root}>
       <Image 
         source={Logo} 
         style={[styles.logo, {height: height * 0.3}]} 
-        resizeMode='contain'/>
+        resizeMode='contain'
+        />
 
+        {/*Ingreso de datos*/}
         <CustomInput 
           placeholder='Nombre de Usuario' 
           value={username} 
@@ -32,7 +41,9 @@ const SingInScreen = () => {
           secureTextEntry
         />
 
-        <CustomButton/>
+        {/*Botones*/}
+        <CustomButton text='Iniciar Sesion' onPress={onSinInPressed}/>
+        <CustomButton text='Olvido su contrasena?' onPress={onForgotPasswordPressed} type='TERTIARY'/>
     </View>
   );
 };

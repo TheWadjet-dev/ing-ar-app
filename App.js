@@ -12,7 +12,8 @@ const App = () => {
 
 const styles = StyleSheet.create({
   root: {
-    flex: 1,
+    flex: 0.75,
+    justifyContent: 'center',
     backgroundColor: '#F9FBFC',
   },
 });
