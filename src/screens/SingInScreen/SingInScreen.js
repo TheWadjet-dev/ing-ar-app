@@ -12,12 +12,16 @@ const SingInScreen = () => {
 
   const {height} = useWindowDimensions();
   
-  const onSinInPressed = () => {
+  const onSignInPressed = () => {
     console.warn("Iniciar Sesion")
   }
 
   const onForgotPasswordPressed = () => {
     console.warn("Olvido su contrasena")
+  }
+
+  const onSignUpPressed = () => {
+    console.warn("Registrese aqui")
   }
 
   return (
@@ -42,8 +46,9 @@ const SingInScreen = () => {
         />
 
         {/*Botones*/}
-        <CustomButton text='Iniciar Sesion' onPress={onSinInPressed}/>
+        <CustomButton text='Iniciar Sesion' onPress={onSignInPressed}/>
         <CustomButton text='Olvido su contrasena?' onPress={onForgotPasswordPressed} type='TERTIARY'/>
+        <CustomButton text='Registrese aqui' onPress={onSignUpPressed} type='TERTIARY'/>
     </View>
   );
 };
