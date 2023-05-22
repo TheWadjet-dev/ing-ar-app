@@ -1,11 +1,11 @@
 import React from 'react';
 import { SafeAreaView, StyleSheet} from 'react-native';
-import SingInScreen from './src/screens/SingInScreen';
+import Navigation from './src/navigation';
 
 const App = () => {
   return (
     <SafeAreaView style={styles.root}>
-      <SingInScreen />
+      <Navigation />
     </SafeAreaView>
   );
 };

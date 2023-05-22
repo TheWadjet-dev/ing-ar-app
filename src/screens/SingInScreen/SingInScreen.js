@@ -3,7 +3,7 @@ import { View, Text, Image, StyleSheet, useWindowDimensions } from 'react-native
 import Logo from '../../../assets/images/logo.png';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-
+import { useNavigation } from '@react-navigation/native';
 
 const SingInScreen = () => {
 
@@ -11,17 +11,18 @@ const SingInScreen = () => {
   const [password, setPassword] = useState('');
 
   const {height} = useWindowDimensions();
+  const navigation = useNavigation();
   
   const onSignInPressed = () => {
-    console.warn("Iniciar Sesion")
+    navigation.navigate('Home');
   }
 
   const onForgotPasswordPressed = () => {
-    console.warn("Olvido su contrasena")
+    navigation.navigate('ForgotPassword');
   }
 
   const onSignUpPressed = () => {
-    console.warn("Registrese aqui")
+    navigation.navigate('SignUp');
   }
 
   return (
