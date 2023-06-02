@@ -1,0 +1,63 @@
+{
+  "providers": {
+    "awscloudformation": {
+      "AuthRoleName": "amplify-inglesar-staging-150435-authRole",
+      "UnauthRoleArn": "arn:aws:iam::336958355047:role/amplify-inglesar-staging-150435-unauthRole",
+      "AuthRoleArn": "arn:aws:iam::336958355047:role/amplify-inglesar-staging-150435-authRole",
+      "Region": "us-east-2",
+      "DeploymentBucketName": "amplify-inglesar-staging-150435-deployment",
+      "UnauthRoleName": "amplify-inglesar-staging-150435-unauthRole",
+      "StackName": "amplify-inglesar-staging-150435",
+      "StackId": "arn:aws:cloudformation:us-east-2:336958355047:stack/amplify-inglesar-staging-150435/9f9ed780-008d-11ee-a6ff-0231d4a82c6d",
+      "AmplifyAppId": "d10cnc3673ztov"
+    }
+  },
+  "auth": {
+    "InglesAR": {
+      "customAuth": false,
+      "dependsOn": [],
+      "frontendAuthConfig": {
+        "mfaConfiguration": "OFF",
+        "mfaTypes": [
+          "SMS"
+        ],
+        "passwordProtectionSettings": {
+          "passwordPolicyMinLength": 8,
+          "passwordPolicyCharacters": [
+            "REQUIRES_LOWERCASE",
+            "REQUIRES_NUMBERS",
+            "REQUIRES_UPPERCASE"
+          ]
+        },
+        "signupAttributes": [
+          "NAME",
+          "FAMILY_NAME",
+          "EMAIL"
+        ],
+        "socialProviders": [],
+        "usernameAttributes": [
+          "EMAIL"
+        ],
+        "verificationMechanisms": [
+          "EMAIL"
+        ]
+      },
+      "providerPlugin": "awscloudformation",
+      "service": "Cognito",
+      "output": {
+        "UserPoolId": "us-east-2_AUjDrcQFB",
+        "AppClientIDWeb": "271mfma1kqo5s7in4nbmmrnf87",
+        "AppClientID": "194bm8elsul46ifs70f62lq1q",
+        "IdentityPoolId": "us-east-2:1560ee34-0640-48a3-9f6f-42099720e993",
+        "UserPoolArn": "arn:aws:cognito-idp:us-east-2:336958355047:userpool/us-east-2_AUjDrcQFB",
+        "IdentityPoolName": "testAuthIdentityPool__staging",
+        "UserPoolName": "InglesAR"
+      },
+      "lastPushTimeStamp": "2023-06-01T16:32:07.570Z",
+      "providerMetadata": {
+        "s3TemplateURL": "https://s3.amazonaws.com/amplify-inglesar-staging-150435-deployment/amplify-cfn-templates/auth/InglesAR-cloudformation-template.json",
+        "logicalId": "authInglesAR"
+      }
+    }
+  }
+}
