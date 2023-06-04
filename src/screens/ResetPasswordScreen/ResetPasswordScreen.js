@@ -1,18 +1,23 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { useNavigation } from '@react-navigation/native';
-
+import { useForm } from 'react-hook-form';
+import { Auth } from 'aws-amplify';
 
 const ResetPasswordScreen = () => {
-
-    const [code, setCode] = useState('');
-    const [newpassword, setNewPassword] = useState('');
+    const { control, handleSubmit} = useForm();
     const navigation = useNavigation();
 
-    const onSubmitPressed = () => {
-        navigation.navigate('Home');
+    const onSubmitPressed = async(data) => {
+        try{
+            await Auth.forgotPasswordSubmit(data.username, data.code, data.password);
+            navigation.navigate('SignIn');
+        }catch(e){
+            Alert.alert('Oops', e.message);
+        }
+        
     }
 
     const onSignInPressed = () => {
@@ -25,19 +30,34 @@ const ResetPasswordScreen = () => {
 
             {/*Ingreso de datos*/}
             <CustomInput
-                placeholder='Codigo'
-                value={code}
-                setValue={setCode}
+                name='username'
+                placeholder='Correo'
+                control={control}
+                rules={{required: 'Correo requerido'}}
             />
-            {/*Ingreso de datos*/}
+
             <CustomInput
+                name='code'
+                placeholder='Codigo'
+                control={control}
+                rules={{required: 'Codigo requerido'}}
+            />
+
+            <CustomInput
+                name='password'
                 placeholder='Nueva Contrasena'
-                value={newpassword}
-                setValue={setNewPassword}
+                control={control}
+                secureTextEntry
+                rules={{
+                    required: 'La contrasena es obligatorio',
+                    minLength: {
+                        value: 6,
+                        message: 'El minimo de caracteres para la contrasena son 6'
+                    }}}
             />
 
             {/*Botones*/}
-            <CustomButton text='Confirmar' onPress={onSubmitPressed} />
+            <CustomButton text='Confirmar' onPress={handleSubmit(onSubmitPressed)} />
             
             <CustomButton text='Volver para Iniciar Sesión' onPress={onSignInPressed} type='TERTIARY'/>
         </View>
