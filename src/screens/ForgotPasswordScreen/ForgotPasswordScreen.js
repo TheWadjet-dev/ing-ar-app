@@ -1,16 +1,25 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
 import { useNavigation } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
+import { Auth } from 'aws-amplify';
 
 const ForgotPasswordScreen = () => {
 
-    const [username, setUsername] = useState('');
+    const { control, handleSubmit} = useForm();
     const navigation = useNavigation();
 
-    const onSendPressed = () => {
-        navigation.navigate('ResetPassword');
+    const onSendPressed = async(data) => {
+        try{
+            await Auth.forgotPassword(data.username);
+            navigation.navigate('ResetPassword');
+        }catch(e){
+            Alert.alert('Oops', e.message);
+        }
+        
+        //
     }
 
     const onSignInPressed = () => {
@@ -23,13 +32,14 @@ const ForgotPasswordScreen = () => {
 
             {/*Ingreso de datos*/}
             <CustomInput
-                placeholder='Usuario'
-                value={username}
-                setValue={setUsername}
+                name='username'
+                placeholder='Correo'
+                control={control}
+                rules={{required: 'Correo obligatorio'}}
             />
 
             {/*Botones*/}
-            <CustomButton text='Enviar' onPress={onSendPressed} />
+            <CustomButton text='Enviar' onPress={handleSubmit(onSendPressed)} />
             
             <CustomButton text='Volver para Iniciar Sesión' onPress={onSignInPressed} type='TERTIARY'/>
         </View>

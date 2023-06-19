@@ -1,25 +1,41 @@
 import React, { useState } from 'react';
-import { View, Text, StyleSheet } from 'react-native';
+import { View, Text, StyleSheet, Alert } from 'react-native';
 import CustomInput from '../../components/CustomInput/CustomInput';
 import CustomButton from '../../components/CustomButton/CustomButton';
-import { useNavigation } from '@react-navigation/native';
+import { useNavigation, useRoute } from '@react-navigation/native';
+import { useForm } from 'react-hook-form';
+import { Auth } from 'aws-amplify';
 
 const ConfirmEmailScreen = () => {
+    const route = useRoute();
+    const { control, handleSubmit} = useForm({
+        defaultValues: {username: route?.params?.username}
+    });
 
-    const [code, setCode] = useState('');
+    //const username = watch('username');
+
     const navigation = useNavigation();
 
-
-
-    const onConfirmPressed = () => {
-        navigation.navigate('Home');
+    const onConfirmPressed = async data => {
+        try{
+            await Auth.confirmSignUp(data.username, data.code);
+            navigation.navigate('SignIn');
+        }catch(e){
+            Alert.alert('Oops', e.message);
+        }      
     }
 
     const onSignInPressed = () => {
         navigation.navigate('SignIn');
     }
 
-    const onResendPressed = () => {
+    const onResendPressed = async () => {
+        try{
+            await Auth.resendSignUp(username);
+            Alert.alert('Se reenvio el codigo a tu correo')
+        }catch(e){
+            Alert.alert('Oops', e.message);
+        }
         console.warn("Reenviar Codigo")
     }
 
@@ -33,13 +49,21 @@ const ConfirmEmailScreen = () => {
 
             {/*Ingreso de datos*/}
             <CustomInput
+                name='username'
+                placeholder='Correo'
+                control={control}
+                rules={{required: 'Codigo requerido'}}
+            />
+
+            <CustomInput
+                name='code'
                 placeholder='Código de Confirmación'
-                value={code}
-                setValue={setCode}
+                control={control}
+                rules={{required: 'Codigo requerido'}}
             />
 
             {/*Botones*/}
-            <CustomButton text='Confirmar' onPress={onConfirmPressed} />
+            <CustomButton text='Confirmar' onPress={handleSubmit(onConfirmPressed)} />
             <CustomButton text='Reenviar Código' onPress={onResendPressed} type='SECONDARY'/>
             <CustomButton text='Volver para Iniciar Sesión' onPress={onSignInPressed} type='TERTIARY'/>
         </View>
