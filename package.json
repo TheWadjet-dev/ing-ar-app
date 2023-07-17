@@ -17,7 +17,7 @@
     "@react-navigation/native-stack": "^6.9.12",
     "@viro-community/react-viro": "^2.23.0",
     "amazon-cognito-identity-js": "^6.2.0",
-    "aws-amplify": "^5.2.4",
+    "aws-amplify": "^5.3.4",
     "aws-amplify-react-native": "^7.0.2",
     "expo": "~48.0.15",
     "expo-splash-screen": "~0.18.2",
