@@ -2,7 +2,6 @@
 import { View, Text, StyleSheet } from 'react-native';
 import React, { useState } from 'react';
 import {Auth} from 'aws-amplify';
-import { ViroARScene, ViroText, ViroTrackingStateConstants, ViroARSceneNavigator } from '@viro-community/react-viro';
 
 const index = () => {
   const signOut = () => {
@@ -22,26 +21,6 @@ const index = () => {
 
     }
   }
-
-  return (
-    <ViroARScene onTrackingUpdated={onInitialized}>
-      <ViroText text={text}
-        scale={[0.5, 0.5, 0.5]}
-        position={[0, 0, -1]}
-        style={styles.helloWorldTextStyle}/>
-    </ViroARScene>
-  );
-};
-
-export default () => {
-  return (
-    <ViroARSceneNavigator
-      autofocus={true}
-      initialScene={{
-        scene: HelloWorldSceneAR,
-      }}
-      style={styles.f1}/>
-  );
 };
 
 var styles = StyleSheet.create({
